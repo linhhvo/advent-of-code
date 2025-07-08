@@ -5,26 +5,28 @@
 #include <string>
 #include <vector>
 
+using namespace std;
+
 int main() {
   // read data from input file
-  std::ifstream inputFile{"input.txt"};
+  ifstream inputFile{"input.txt"};
 
   if (!inputFile) {
-    std::cerr << "Can't open input file.\n";
+    cerr << "Can't open input file.\n";
     return 1;
   }
 
-  std::string inputStr{};
+  string inputStr{};
 
-  std::vector<int> list1;
-  std::vector<int> list2;
+  vector<int> list1;
+  vector<int> list2;
 
   int count{1};
 
   // extract data
   while (inputFile >> inputStr) {
     // convert input data to integer
-    int inputNum{std::stoi(inputStr)};
+    int inputNum{stoi(inputStr)};
 
     // extract data in each column to its own list
     if (count % 2 != 0) {
@@ -37,27 +39,35 @@ int main() {
   }
 
   // sort both lists in ascending order
-  std::sort(list1.begin(), list1.end());
-  std::sort(list2.begin(), list2.end());
+  sort(list1.begin(), list1.end());
+  sort(list2.begin(), list2.end());
 
-  // calculate distance
+  // calculate total distance
   int sum{0};
 
-  for (long unsigned int i = 0; i < std::size(list1); i++) {
+  for (long unsigned int i = 0; i < size(list1); i++) {
     sum = sum + abs(list1[i] - list2[i]);
   }
 
-  std::cout << sum << '\n';
+  cout << "total distance: " << sum << '\n';
 
-  // std::cout << "List 1: \n";
-  // for (int element : list1) {
-  //   std::cout << element << '\n';
-  // }
-  //
-  // std::cout << "\nList 2: \n";
-  // for (int element : list2) {
-  //   std::cout << element << '\n';
-  // }
+  // calculate similarity score
+  int score{0};
+
+  for (int j : list1) {
+    int elementCount{0};
+
+    // find number of occurrence of target element
+    for (int k : list2) {
+      if (j == k) {
+        elementCount++;
+      }
+    }
+
+    score = score + (j * elementCount);
+  }
+
+  cout << "similarity score: " << score << '\n';
 
   return 0;
 }
