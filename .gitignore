@@ -1,0 +1,22 @@
+# --- Build outputs ---
+*.out
+*.run
+*.exe
+*.dll
+*.so
+*.dylib
+*.obj
+*.o
+*.a
+*.lib
+output
+
+# --- Build system directories ---
+/build/
+/bin/
+/dist/
+
+# --- OS / System Files ---
+.DS_Store
+Thumbs.db
+desktop.ini
