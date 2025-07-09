@@ -8,6 +8,9 @@
 
 using namespace std;
 
+// compare function for descending order
+bool descComp(int first, int next) { return first > next; }
+
 int main() {
   ifstream inputFile{"input.txt"};
 
@@ -43,13 +46,14 @@ int main() {
 
     bool isSafe{true};
 
-    vector<int> dataListRev(size(dataList));
-
-    reverse_copy(dataList.begin(), dataList.end(), dataListRev.begin());
+    // vector<int> dataListRev(size(dataList));
+    //
+    // reverse_copy(dataList.begin(), dataList.end(), dataListRev.begin());
 
     // check if all data points are sorted in either order
     if (is_sorted(dataList.begin(), dataList.end()) ||
-        is_sorted(dataListRev.begin(), dataListRev.end())) {
+        is_sorted(dataList.begin(), dataList.end(), descComp)) {
+      // is_sorted(dataListRev.begin(), dataListRev.end())) {
 
       // check the difference between two adjacent data points
       for (int i = 0; i < static_cast<int>(size(dataList)) - 1; i++) {
