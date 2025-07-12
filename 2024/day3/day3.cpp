@@ -53,36 +53,26 @@ int main() {
   ss << inputFile.rdbuf();
 
   string subStr{ss.str()};
-  size_t pos{subStr.find("don't()")};
+  size_t pos{};
 
-  // if don't() instruction is not found
-  if (pos == string::npos) {
-    finalSum += calculateSum(subStr);
-  } else {
-    while (pos != string::npos) {
-      // calculate sum of multiplications until don't() instruction
-      pos = subStr.find("don't()");
+  while (pos != string::npos) {
+    subStr = subStr.substr(pos);
 
-      string untilDont{subStr};
+    pos = subStr.find("don't()");
 
-      // if don't() instruction is not found
-      if (pos == string::npos) {
-        finalSum += calculateSum(untilDont);
-        break;
-      }
-
-      untilDont = subStr.substr(0, pos);
-      finalSum += calculateSum(untilDont);
-
-      // update substring to sequence starting after don't() instruction
-      subStr = subStr.substr(pos);
-
-      // find do() instruction
-      pos = subStr.find("do()");
-      if (pos != string::npos) {
-        subStr = subStr.substr(pos);
-      }
+    // if don't() instruction is not found
+    if (pos == string::npos) {
+      finalSum += calculateSum(subStr);
+      break;
     }
+
+    string untilDont{subStr.substr(0, pos)};
+    finalSum += calculateSum(untilDont);
+
+    // update substring to start after don't()
+    subStr = subStr.substr(pos);
+
+    pos = subStr.find("do()");
   }
 
   cout << "final result: " << finalSum << '\n';
