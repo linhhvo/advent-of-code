@@ -33,7 +33,7 @@ bool isSafe(vector<int> dataList) {
       is_sorted(dataList.begin(), dataList.end(), descComp)) {
 
     // check the difference between two adjacent data points
-    for (int i = 0; i < static_cast<int>(size(dataList)) - 1; i++) {
+    for (unsigned i = 0; i < size(dataList) - 1; i++) {
       int dataDiff = abs(dataList[i] - dataList[i + 1]);
       if (dataDiff == 0 || dataDiff > 3) {
         return 0;
@@ -62,6 +62,16 @@ int main() {
 
     if (isSafe(dataList)) {
       safeCount++;
+    } else {
+      for (unsigned i = 0; i < size(dataList); i++) {
+        vector<int> newList{dataList};
+
+        newList.erase(newList.begin() + i);
+        if (isSafe(newList)) {
+          safeCount++;
+          break;
+        }
+      }
     }
   }
 
