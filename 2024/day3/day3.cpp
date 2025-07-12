@@ -1,3 +1,4 @@
+#include <cstddef>
 #include <fstream>
 #include <iostream>
 #include <regex>
@@ -51,9 +52,40 @@ int main() {
 
   ss << inputFile.rdbuf();
 
-  finalSum += calculateSum(ss.str());
+  string subStr{ss.str()};
+  size_t pos{subStr.find("don't()")};
 
-  cout << "multiply result: " << finalSum << '\n';
+  // if don't() instruction is not found
+  if (pos == string::npos) {
+    finalSum += calculateSum(subStr);
+  } else {
+    while (pos != string::npos) {
+      // calculate sum of multiplications until don't() instruction
+      pos = subStr.find("don't()");
+
+      string untilDont{subStr};
+
+      // if don't() instruction is not found
+      if (pos == string::npos) {
+        finalSum += calculateSum(untilDont);
+        break;
+      }
+
+      untilDont = subStr.substr(0, pos);
+      finalSum += calculateSum(untilDont);
+
+      // update substring to sequence starting after don't() instruction
+      subStr = subStr.substr(pos);
+
+      // find do() instruction
+      pos = subStr.find("do()");
+      if (pos != string::npos) {
+        subStr = subStr.substr(pos);
+      }
+    }
+  }
+
+  cout << "final result: " << finalSum << '\n';
 
   return 0;
 }
