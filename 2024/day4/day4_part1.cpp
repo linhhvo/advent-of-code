@@ -81,7 +81,7 @@ int diagonalDownCount(int rowIdx, int colIdx, vector<vector<char>> input2d) {
   vector<char> currentRow{input2d[rowIdx]};
 
   if (rowIdx < static_cast<int>(input2d.size()) - 3) {
-    // check both down diagnol left and right directions
+    // check both down diagonal left and right directions
     if (colIdx > 2 && colIdx < static_cast<int>(currentRow.size()) - 3) {
       if (input2d[rowIdx + 1][colIdx + 1] == 'M' &&
           input2d[rowIdx + 2][colIdx + 2] == 'A' &&
@@ -95,7 +95,7 @@ int diagonalDownCount(int rowIdx, int colIdx, vector<vector<char>> input2d) {
         xmasCount++;
       }
     }
-    // check down diagnol only right direction
+    // check down diagonal only right direction
     else if (colIdx < 3) {
       if (input2d[rowIdx + 1][colIdx + 1] == 'M' &&
           input2d[rowIdx + 2][colIdx + 2] == 'A' &&
@@ -103,7 +103,7 @@ int diagonalDownCount(int rowIdx, int colIdx, vector<vector<char>> input2d) {
         xmasCount++;
       }
     }
-    // check down diagnol only left direction
+    // check down diagonal only left direction
     else {
       if (input2d[rowIdx + 1][colIdx - 1] == 'M' &&
           input2d[rowIdx + 2][colIdx - 2] == 'A' &&
@@ -120,7 +120,7 @@ int diagonalUpCount(int rowIdx, int colIdx, vector<vector<char>> input2d) {
   vector<char> currentRow{input2d[rowIdx]};
 
   if (rowIdx > 2) {
-    // check both up diagnol left and right directions
+    // check both up diagonal left and right directions
     if (colIdx > 2 && colIdx < static_cast<int>(currentRow.size()) - 3) {
       if (input2d[rowIdx - 1][colIdx - 1] == 'M' &&
           input2d[rowIdx - 2][colIdx - 2] == 'A' &&
@@ -134,7 +134,7 @@ int diagonalUpCount(int rowIdx, int colIdx, vector<vector<char>> input2d) {
         xmasCount++;
       }
     }
-    // check up diagnol only right direction
+    // check up diagonal only right direction
     else if (colIdx < 3) {
       if (input2d[rowIdx - 1][colIdx + 1] == 'M' &&
           input2d[rowIdx - 2][colIdx + 2] == 'A' &&
@@ -142,7 +142,7 @@ int diagonalUpCount(int rowIdx, int colIdx, vector<vector<char>> input2d) {
         xmasCount++;
       }
     }
-    // check up diagnol only left direction
+    // check up diagonal only left direction
     else {
       if (input2d[rowIdx - 1][colIdx - 1] == 'M' &&
           input2d[rowIdx - 2][colIdx - 2] == 'A' &&
