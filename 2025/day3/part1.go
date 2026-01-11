@@ -32,36 +32,27 @@ func main() {
 		// loop through each battery in the bank to find the largest digit
 		// last digit is skipped because there is no other digit after it to form a valid joltage
 		for i := 0; i < len(line)-1; i++ {
-
-			currentChar := rune(line[i])
-
 			// if the current digit is the largest digit, find the largest digit among the digits after it to form a joltage
-			if currentChar > largest {
-				largest = currentChar
-
-				// reset second battery value
-				secondLargest = '0'
+			if rune(line[i]) > largest {
+				largest = rune(line[i])
+				secondLargest = '0' // reset second battery value
 
 				for j := i + 1; j < len(line); j++ {
-					current := rune(line[j])
-
-					if current > secondLargest {
-						secondLargest = current
+					if rune(line[j]) > secondLargest {
+						secondLargest = rune(line[j])
 					}
 				}
 			}
 
 		}
 
-		joltage := string(largest) + string(secondLargest)
-
-		joltageNum, err := strconv.Atoi(joltage)
+		joltage, err := strconv.Atoi(string(largest) + string(secondLargest))
 
 		if err != nil {
 			log.Fatalf("can't convert joltage to num")
 		}
 
-		sum = sum + joltageNum
+		sum = sum + joltage
 	}
 
 	fmt.Println("sum", sum)
