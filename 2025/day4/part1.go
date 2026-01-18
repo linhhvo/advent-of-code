@@ -14,7 +14,7 @@ func getNeighborCount(grid [][]string, row int, col int) int {
 
 	count := 0
 
-	for i := range len(neighbors) {
+	for i := range neighbors {
 		if neighbors[i] == "@" {
 			count++
 		}
@@ -45,7 +45,7 @@ func main() {
 
 		// create a padding row with no paper roll
 		padding = make([]string, len(row)+2)
-		for i := range len(padding) {
+		for i := range padding {
 			padding[i] = "."
 		}
 

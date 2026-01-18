@@ -67,8 +67,8 @@ func main() {
 	count := 0
 
 	// go through each ingredient ID and check if it's within any of the given ranges
-	for i := 0; i < len(ingredients); i++ {
-		for j := 0; j < len(ranges); j++ {
+	for i := range ingredients {
+		for j := range ranges {
 			lower, upper := getRange(ranges[j])
 
 			if ingredients[i] >= lower && ingredients[i] <= upper {
