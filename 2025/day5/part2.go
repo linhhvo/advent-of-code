@@ -77,22 +77,29 @@ func main() {
 	for i := range ranges {
 		lower, upper := getRange(ranges[i])
 
-		// separate groups of ranges that overlap with each other
-		if lower > upperMax {
-			if len(overlapGroup) > 0 {
-				groupings = append(groupings, overlapGroup)
-			}
+		fmt.Println("overlapGroup begin loop", overlapGroup)
+
+		// if current range doesn't overlap with the previous range, add the overlapGroup to the list of all groupings
+		if lower > upperMax && len(overlapGroup) > 0 {
+			groupings = append(groupings, overlapGroup)
 			overlapGroup = []limit{}
 		}
 
+		// when overlapGroup is empty or when current range overlaps with the previous range, add it to the existing overlapGroup
 		overlapGroup = append(overlapGroup, limit{lower, upper})
-		upperMax = upper
+
+		// get the range maximum of the whole overlapGroup
+		upperMax = slices.MaxFunc(overlapGroup, func(a, b limit) int {
+			return cmp.Compare(a.upper, b.upper)
+		}).upper
 	}
 
 	// add the last group if there is no more ID range to read
 	if len(overlapGroup) > 0 {
 		groupings = append(groupings, overlapGroup)
 	}
+
+	fmt.Println("groupings", groupings)
 
 	for i := range groupings {
 		rangeCount := 0
