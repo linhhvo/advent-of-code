@@ -77,8 +77,6 @@ func main() {
 	for i := range ranges {
 		lower, upper := getRange(ranges[i])
 
-		fmt.Println("overlapGroup begin loop", overlapGroup)
-
 		// if current range doesn't overlap with the previous range, add the overlapGroup to the list of all groupings
 		if lower > upperMax && len(overlapGroup) > 0 {
 			groupings = append(groupings, overlapGroup)
@@ -98,8 +96,6 @@ func main() {
 	if len(overlapGroup) > 0 {
 		groupings = append(groupings, overlapGroup)
 	}
-
-	fmt.Println("groupings", groupings)
 
 	for i := range groupings {
 		rangeCount := 0
