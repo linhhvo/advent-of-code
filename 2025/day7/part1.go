@@ -33,19 +33,15 @@ func main() {
 		for j := range len(matrix[i]) {
 			if matrix[i][j] == "S" {
 				matrix[i+1][j] = "|"
-			} else if matrix[i][j] == "^" && matrix[i-1][j] == "|" {
+			} else if matrix[i][j] == "^" && matrix[i-1][j] == "|" { // encounter spliter
 				matrix[i][j-1] = "|"
 				matrix[i][j+1] = "|"
 				count++
-			} else if i > 0 && matrix[i-1][j] == "|" {
+			} else if i > 0 && matrix[i-1][j] == "|" { // pass through free space
 				matrix[i][j] = "|"
 			}
 		}
 	}
-
-	// for i := range len(matrix) {
-	// 	fmt.Println(matrix[i])
-	// }
 
 	fmt.Println("count: ", count)
 
